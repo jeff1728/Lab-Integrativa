@@ -1,0 +1,19 @@
+/* Estilos globales */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Estilos específicos para elementos */
+body.dark-mode .navbar {
+    background-color: #1f1f1f;
+    border-color: #444;
+}
+
+body.dark-mode a {
+    color: #ffffff;
+}
+
+body.dark-mode .container-fluid {
+    background-color: #1a1a1a;
+}
