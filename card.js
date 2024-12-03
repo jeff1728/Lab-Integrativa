@@ -1,7 +1,7 @@
 class CardComponent extends HTMLElement {
   constructor() {
     super();
-    // Crear el shadow DOM
+    // Shadow DOM
     const shadow = this.attachShadow({ mode: "open" });
 
     // Estructura del componente
