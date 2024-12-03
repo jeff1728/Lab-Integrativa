@@ -28,10 +28,14 @@ class FormularioComentarios extends HTMLElement {
       }
       .bg-light {
         background-color: #F3F6FF !important;
+        margin-top: 40px; /* Espacio superior */
+  padding: 20px;
       }
-      :host(.dark) .bg-light {
-        background-color: #194376 !important;
-      }
+    :host(.dark) .bg-light {
+  background-color: rgba(51, 51, 51, 1) !important;  /* Gris oscuro */
+}
+
+
       :host(.dark) {
         background-color: #222;
         color: white;

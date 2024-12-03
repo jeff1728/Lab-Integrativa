@@ -1,21 +1,33 @@
 /* Contenedor general */
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* Espacio entre las tarjetas */
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Tarjetas responsivas */
+  gap: 20px; /* Espaciado entre tarjetas */
   padding: 20px;
+  box-sizing: border-box; /* Evita que el padding afecte el tamaño del contenedor */
+  width: 100%; /* Asegúrate de que no exceda el ancho de la pantalla */
+  max-width: 1200px; /* Opcional, limita el tamaño máximo del contenedor */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+}
+card-component {
+  display: block; /* Asegúrate de que actúe como un bloque */
+  width: 100%; /* Deja que ocupe el espacio dentro de cada columna */
 }
 
 /* Estilo de la tarjeta */
 .card {
   border: 1px solid #ccc;
+  margin-bottom: 20px;
   border-radius: 8px;
   overflow: hidden;
   max-width: 300px;
-  background-color: #f9f9f9;
+  background-color: #f9f9f9; /* Fondo por defecto (claro) */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
 }
 
 .card:hover {
@@ -23,9 +35,16 @@
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
 }
 
-.card-img {
+.card.dark {
+  background-color: #333; /* Fondo oscuro */
+  color: white; /* Texto claro */
+  border-color: #444; /* Borde oscuro */
+}
+
+.card img {
   width: 100%;
   height: auto;
+  display: block; /* Evita espacio blanco no deseado debajo de las imágenes */
 }
 
 .card-body {
@@ -41,19 +60,30 @@
 .card-body p {
   margin: 0 0 16px;
   font-size: 0.9em;
-  color: #555;
+  color: #555; /* Texto claro por defecto */
+  transition: color 0.3s ease; /* Transición para cambio de color */
+}
+
+.card-body p.dark {
+  color: #ccc; /* Texto más claro en tema oscuro */
 }
 
 .btn-cc {
   display: inline-block;
   padding: 10px 16px;
-  background: #007bff;
+  background: #007bff; /* Botón por defecto */
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
   font-size: 0.9em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-cc.dark {
+  background: #444; /* Botón oscuro */
+  color: #fff; /* Texto claro */
 }
 
 .btn:hover {
-  background: #0056b3;
+  background: #0056b3; /* Color del botón al pasar el cursor */
 }
