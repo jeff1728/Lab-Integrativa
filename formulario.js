@@ -5,7 +5,7 @@ class FormularioComentarios extends HTMLElement {
     // Crea el Shadow DOM
     const shadow = this.attachShadow({ mode: "open" });
 
-    // Contenido del formulario
+    // Define la estructura y los estilos del formulario
     const template = document.createElement("template");
     template.innerHTML = `
         <style>
@@ -105,7 +105,7 @@ class FormularioComentarios extends HTMLElement {
   }
 
   updateTheme(event) {
-    const theme = event.detail; // 'dark' o 'light'
+    const theme = event.detail; // 'dark' o 'light' //Se ejecuta cuando se detecta el theme-change
     if (theme === "dark") {
       this.classList.add("dark");
     } else {
