@@ -1,18 +1,18 @@
 
 class ProductoCard extends HTMLElement {
-            constructor() {
-                super();
-    
-                const shadow = this.attachShadow({ mode: "open" });
-    
-                const title = this.getAttribute("title");
-                const image = this.getAttribute("image");
-                const features = this.getAttribute("features").split(",");
-    
-                const container = document.createElement("div");
-                container.setAttribute("class", "card-container");
-    
-                container.innerHTML = `
+    constructor() {
+        super();
+
+        const shadow = this.attachShadow({ mode: "open" });
+
+        const title = this.getAttribute("title");
+        const image = this.getAttribute("image");
+        const features = this.getAttribute("features").split(",");
+
+        const container = document.createElement("div");
+        container.setAttribute("class", "card-container");
+
+        container.innerHTML = `
                     <div class="circle">
                         <img src="${image}" alt="${title}" class="image">
                         <h3 class="title">${title}</h3>
@@ -22,10 +22,10 @@ class ProductoCard extends HTMLElement {
                     </ul>
                     <button class="btn">Comprar ${title}</button>
                 `;
-                
-    
-                const style = document.createElement("style");
-style.textContent = `
+
+
+        const style = document.createElement("style");
+        style.textContent = `
     .card-container {
         background: #f8f9fa;
         border-radius: 10px;
@@ -111,23 +111,23 @@ style.textContent = `
         background: #46c6ce;
     }
 `;
-    
-                shadow.appendChild(style);
-                shadow.appendChild(container);
-            }
-        }
-    
-        customElements.define("producto-card", ProductoCard);
 
-        class RatingStars extends HTMLElement {
-            constructor() {
-                super();
-                const shadow = this.attachShadow({ mode: "open" });
-        
-                // Estructura HTML
-                const container = document.createElement("div");
-                container.setAttribute("class", "rating-container");
-                container.innerHTML = `
+        shadow.appendChild(style);
+        shadow.appendChild(container);
+    }
+}
+
+customElements.define("producto-card", ProductoCard);
+
+class RatingStars extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+
+        // Estructura HTML
+        const container = document.createElement("div");
+        container.setAttribute("class", "rating-container");
+        container.innerHTML = `
                     <h2 class="rating-title">¿Te gustan nuestros productos? Califícanos!</h2>
                     <div class="stars"> 
                         <span data-value="1" class="star">&#9734;</span>
@@ -137,9 +137,9 @@ style.textContent = `
                         <span data-value="5" class="star">&#9734;</span>
                     </div>
                 `;
-        
-                const style = document.createElement("style");
-                style.textContent = `
+
+        const style = document.createElement("style");
+        style.textContent = `
                     .rating-container {
                         text-align: center;
                         padding: 20px;
@@ -182,23 +182,23 @@ style.textContent = `
                         color: #555;
                     }
                 `;
-        
+
+        container.querySelectorAll(".star").forEach(star => {  //selecciona todas las estrellas y las recorre
+            star.addEventListener("click", (e) => {
+                const value = e.target.getAttribute("data-value"); //obtiene el valor de data-value (numero de la estrella)
                 container.querySelectorAll(".star").forEach(star => {
-                    star.addEventListener("click", (e) => {
-                        const value = e.target.getAttribute("data-value");
-                        container.querySelectorAll(".star").forEach(star => {
-                            star.classList.remove("selected");
-                        });
-                        for (let i = 0; i < value; i++) {
-                            container.querySelectorAll(".star")[i].classList.add("selected");
-                        }
-                    });
+                    star.classList.remove("selected");
                 });
-        
-                shadow.appendChild(style);
-                shadow.appendChild(container);
-            }
-        }
-        
-        customElements.define("rating-stars", RatingStars);
-        
+                for (let i = 0; i < value; i++) {
+                    container.querySelectorAll(".star")[i].classList.add("selected"); //aplica la clase desde la primera hasta la seleccionada
+                }
+            });
+        });
+
+        shadow.appendChild(style);
+        shadow.appendChild(container);
+    }
+}
+
+customElements.define("rating-stars", RatingStars);
+
