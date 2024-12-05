@@ -39,7 +39,7 @@ class ProductoCard extends HTMLElement {
                 transform: translateY(-10px);
             }
 
-            .circle {
+            .circle {j
                 width: 200px;
                 height: 200px;
                 margin: 0 auto 10px; /* Cambié el margen inferior */
