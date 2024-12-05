@@ -1,4 +1,4 @@
-class FormularioComentarios extends HTMLElement {
+class Formulario extends HTMLElement {
   constructor() {
     super();
 
@@ -131,4 +131,4 @@ class FormularioComentarios extends HTMLElement {
 }
 
 // Define el nuevo elemento personalizado
-customElements.define("formulario-comentarios", FormularioComentarios);
+customElements.define("formulario-comentarios", Formulario);
