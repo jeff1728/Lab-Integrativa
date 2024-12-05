@@ -2,9 +2,9 @@ class ThemeToggle extends HTMLElement {
   constructor() {
     super();
     // Crear el shadow DOM
-    const shadow = this.attachShadow({ mode: "open" });
+    const shadow = this.attachShadow({ mode: "open" }); //El modo "open" permite que el código externo acceda al shadow DOM usando element.shadowRoot.
 
-    // Estructura del componente
+    // Define la estructura :v
     shadow.innerHTML = `
       <style>
         .toggle-container {
@@ -54,8 +54,8 @@ class ThemeToggle extends HTMLElement {
       </style>
 
       <label class="toggle-container">
-        <input type="checkbox" class="toggle-checkbox" />
-        <span class="toggle-slider"></span>
+        <input type="checkbox" class="toggle-checkbox" /> 
+        <span class="toggle-slider"></span> 
       </label>
     `;
 
@@ -64,7 +64,7 @@ class ThemeToggle extends HTMLElement {
 
     // Cambiar tema al hacer clic
     checkbox.addEventListener("change", () => {
-      const body = document.getElementById("page-body");
+      const body = document.getElementById("page-body"); // se modifica el fondo y el texto del elemento con Id
       const theme = checkbox.checked ? "dark" : "light";
 
       if (body) {
@@ -79,7 +79,7 @@ class ThemeToggle extends HTMLElement {
       const themeChangeEvent = new CustomEvent("theme-change", {
         detail: theme,
       });
-      document.dispatchEvent(themeChangeEvent);
+      document.dispatchEvent(themeChangeEvent); //Se envia al documento para otros componentes
     });
   }
 }
