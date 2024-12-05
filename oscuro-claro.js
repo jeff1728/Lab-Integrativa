@@ -4,7 +4,7 @@ class ThemeToggle extends HTMLElement {
     // Crear el shadow DOM
     const shadow = this.attachShadow({ mode: "open" }); //El modo "open" permite que el código externo acceda al shadow DOM usando element.shadowRoot.
 
-    // Define la estructura :v
+    // Define la estructura :
     shadow.innerHTML = `
       <style>
         .toggle-container {
