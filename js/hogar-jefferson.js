@@ -1,16 +1,17 @@
 
 class ProductoCard extends HTMLElement {
-    constructor() {
-        super();
+    constructor() { // Constructor de la clase, se ejecuta cuando se instancia el componente.
+        super(); 
 
-        const shadow = this.attachShadow({ mode: "open" });
+        const shadow = this.attachShadow({ mode: "open" }); // Crea un shadow DOM en modo abierto.
 
-        const title = this.getAttribute("title");
-        const image = this.getAttribute("image");
-        const features = this.getAttribute("features").split(",");
+        const title = this.getAttribute("title"); // Obtiene el atributo 'title' del componente.
+        const image = this.getAttribute("image"); 
+        const features = this.getAttribute("features").split(","); // Obtiene el atributo 'features' y lo convierte en un array.
 
-        const container = document.createElement("div");
-        container.setAttribute("class", "card-container");
+        const container = document.createElement("div"); // Crea un nuevo elemento div.
+        container.setAttribute("class", "card-container"); // Asigna la clase 'card-container' al div creado.
+
 
         container.innerHTML = `
             <div class="circle">
@@ -38,7 +39,7 @@ class ProductoCard extends HTMLElement {
                 transform: translateY(-10px);
             }
 
-            .circle {
+            .circle {j
                 width: 200px;
                 height: 200px;
                 margin: 0 auto 10px; /* Cambié el margen inferior */
@@ -180,17 +181,18 @@ class ProductoCard extends HTMLElement {
                     }
                 `;
         
-                container.querySelectorAll(".star").forEach(star => {
-                    star.addEventListener("click", (e) => {
-                        const value = e.target.getAttribute("data-value");
-                        container.querySelectorAll(".star").forEach(star => {
-                            star.classList.remove("selected");
+                container.querySelectorAll(".star").forEach(star => { // Selecciona todos los elementos con la clase 'star' y recorre cada uno.
+                    star.addEventListener("click", (e) => { // Añade un evento de clic para cada estrella.
+                        const value = e.target.getAttribute("data-value"); // Obtiene el valor asociado a la estrella clickeada desde el atributo 'data-value'.
+                        container.querySelectorAll(".star").forEach(star => { // Vuelve a seleccionar todas las estrellas.
+                            star.classList.remove("selected"); // Elimina la clase 'selected' de todas las estrellas para desmarcarlas.
                         });
-                        for (let i = 0; i < value; i++) {
-                            container.querySelectorAll(".star")[i].classList.add("selected");
+                        for (let i = 0; i < value; i++) { // Recorre el número de estrellas hasta el valor obtenido.
+                            container.querySelectorAll(".star")[i].classList.add("selected"); // Añade la clase 'selected' a las estrellas correspondientes.
                         }
                     });
                 });
+                
         
                 shadow.appendChild(style);
                 shadow.appendChild(container);
