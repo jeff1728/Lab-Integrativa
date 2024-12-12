@@ -7,7 +7,7 @@ function updateCartCount() {
   cartCount.textContent = totalItems;
 }
 
-// Mostrar/ocultar barra lateral 
+// Mostrar/ocultar barra lateral
 export function toggleCartSidebar() {
   const cartSidebar = document.getElementById("cart-sidebar");
 
@@ -182,14 +182,6 @@ function setupCartEventListeners() {
       removeFromCart(productId);
     });
   });
-
-  // Botón "Seguir comprando"
-  const continueShoppingButton = document.getElementById("continue-shopping");
-  if (continueShoppingButton) {
-    continueShoppingButton.addEventListener("click", () => {
-      window.location.href = "cart.html";
-    });
-  }
 }
 
 // Actualizar cantidad de producto

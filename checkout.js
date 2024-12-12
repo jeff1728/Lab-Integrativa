@@ -1,10 +1,11 @@
-let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];//este arreglo almacena los datos de cartitems 
+//en caso de no existir productos se inicializa como un arreglo  vacio
 
-function renderCheckoutPage() {
+function renderCheckoutPage() {//Esta funcion renderiza la pagina de checkout
   const cartSummary = document.getElementById("cart-summary");
   const checkoutTotal = document.getElementById("checkout-total");
 
-  if (cartItems.length === 0) {
+  if (cartItems.length === 0) {// si el carrito se encuentra vacio muestra un mensaje y se establece el total como 0
     cartSummary.innerHTML = `<p>Tu carrito está vacío.</p>`;
     checkoutTotal.textContent = "0.00";
     return;
@@ -22,7 +23,7 @@ function renderCheckoutPage() {
   `;
 
   // Mostrar productos en el resumen
-  cartSummary.innerHTML += cartItems
+  cartSummary.innerHTML += cartItems// se mapea sobre cartitems para que se muestre cada producto en una fila
     .map(
       (item) => `
         <div class="row align-items-center mb-3">
@@ -77,12 +78,12 @@ function setupQuantityControls() {
     });
   });
 }
-
+//busca el producto por su id en Cartitems
 function updateQuantity(productId, delta) {
   const product = cartItems.find((item) => item.id === productId);
   if (product) {
-    product.quantity = Math.max(1, product.quantity + delta);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    product.quantity = Math.max(1, product.quantity + delta); //Garantiza que la cantidad minima sea 1
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));//se guardan los camnbios en el localstorage
   }
 }
 
@@ -92,9 +93,15 @@ document.getElementById("checkout-form").addEventListener("submit", (e) => {
     icon: "success",
     title: "¡Pedido confirmado!",
     text: "Gracias por tu compra.",
+    timer: 1000, // Mostrar durante 2segundos
+    timerProgressBar: true, // Barra de progreso del temporizador
+    showConfirmButton: false, // Evitar el botón de confirmación
+  }).then(() => {
+    localStorage.removeItem("cartItems"); //se limpia el carrito de compras jeje
+    window.location.href = "carlosc.html"; // Redirigir a la página principal
   });
-  localStorage.removeItem("cartItems");
-  window.location.href = "carlosc.html"; // Redirigir a la página principal
 });
+
+renderCheckoutPage();
 
 renderCheckoutPage();

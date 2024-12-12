@@ -3,7 +3,7 @@ import { showProductDetails } from "./productDetails.js";
 import { toggleCartSidebar, addToCart, initializeCart } from "./cart.js";
 
 document.getElementById("cart-icon").addEventListener("click", (event) => {
-  if (window.location.pathname.includes("cart.html")) {
+  if (window.location.pathname.includes("checkout.html")) {
     event.preventDefault();
     return;
   }
@@ -18,28 +18,28 @@ const products = [
   {
     id: "1",
     name: "Desinfectante",
-    price: 5.00,
+    price: 5.0,
     image: "img/Desinfectante.jpg",
     description: "Desinfectante para múltiples superficies.",
   },
   {
     id: "2",
     name: "Jabón líquido ",
-    price: 2.50,
+    price: 2.5,
     image: "img/Jabon-liquido.jpg",
     description: "Jabón líquido suave para manos.",
   },
   {
     id: "3",
     name: "Limpiador",
-    price: 2.00,
+    price: 2.0,
     image: "img/Limpiador.jpg",
     description: "Limpiador de pisos con aroma fresco.",
   },
   {
     id: "4",
     name: "Toallas de Papel",
-    price: 3.00,
+    price: 3.0,
     image: "img/toallas-papel.jpg",
     description: "Toallas de papel.",
   },
