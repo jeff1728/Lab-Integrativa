@@ -7,7 +7,7 @@ function updateCartCount() {
   cartCount.textContent = totalItems;
 }
 
-// Mostrar/ocultar barra lateral con restricción mejorada
+// Mostrar/ocultar barra lateral 
 export function toggleCartSidebar() {
   const cartSidebar = document.getElementById("cart-sidebar");
 
