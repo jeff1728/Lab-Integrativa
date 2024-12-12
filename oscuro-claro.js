@@ -2,7 +2,7 @@ class ThemeToggle extends HTMLElement {
   constructor() {
     super();
     // Crear el shadow DOM
-    const shadow = this.attachShadow({ mode: "open" }); //El modo "open" permite que el código externo acceda al shadow DOM usando element.shadowRoot.
+    const shadow = this.attachShadow({ mode: "open" });
 
     // Define la estructura :
     shadow.innerHTML = `
@@ -64,22 +64,32 @@ class ThemeToggle extends HTMLElement {
 
     // Cambiar tema al hacer clic
     checkbox.addEventListener("change", () => {
-      const body = document.getElementById("page-body"); // se modifica el fondo y el texto del elemento con Id
+      const body = document.getElementById("page-body"); // Fondo de la página
+      const cartSidebar = document.getElementById("cart-sidebar"); // Barra lateral del carrito
       const theme = checkbox.checked ? "dark" : "light";
 
+      // Cambiar el estilo del body
       if (body) {
-        // Cambiar el estilo del body
         body.style.backgroundColor = theme === "dark" ? "#222" : "white";
         body.style.color = theme === "dark" ? "white" : "black";
       } else {
         console.error("El elemento con ID 'page-body' no existe.");
       }
 
+      // Cambiar el estilo de la barra lateral del carrito
+      if (cartSidebar) {
+        cartSidebar.style.backgroundColor =
+          theme === "dark" ? "#333" : "#f8f9fa";
+        cartSidebar.style.color = theme === "dark" ? "white" : "black";
+      } else {
+        console.error("El elemento con ID 'cart-sidebar' no existe.");
+      }
+
       // Emitir evento personalizado para informar a otros componentes
       const themeChangeEvent = new CustomEvent("theme-change", {
         detail: theme,
       });
-      document.dispatchEvent(themeChangeEvent); //Se envia al documento para otros componentes
+      document.dispatchEvent(themeChangeEvent);
     });
   }
 }

@@ -9681,7 +9681,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #194376 !important;
+  color: #194376;
 }
 
 a.text-primary:hover,

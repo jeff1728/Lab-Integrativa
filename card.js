@@ -1,52 +1,38 @@
-class CardComponent extends HTMLElement {
-  constructor() {
-    super();
-    // Shadow DOM
-    const shadow = this.attachShadow({ mode: "open" });
+// card.js
 
-    // Estructura del componente
-    shadow.innerHTML = `
-      <style>
-        @import url("card.css");
-      </style>
-      <div class="card">
-        <img src="${this.getAttribute("img-src")}" alt="${this.getAttribute(
-      "img-alt"
-    )}" class="card-img">
-        <div class="card-body">
-          <h3>${this.getAttribute("title")}</h3>
-          <p>${this.getAttribute("text")}</p>
-          <a href="${this.getAttribute(
-            "link"
-          )}" class="btn-cc">${this.getAttribute("button-text")}</a>
+export function createProductCard(product, onView, onAddToCart) {
+  const card = document.createElement("div");
+  card.className = "col-md-4 mb-4"; // Bootstrap grid
+
+  card.innerHTML = `
+    <div class="card h-100 text-center">
+      <div class="card-image position-relative">
+        <img src="${product.image}" class="card-img-top img-fluid" alt="${
+    product.name
+  }">
+        <div class="card-overlay d-flex justify-content-center align-items-center">
+          <i class="fas fa-eye text-white mx-2 icon-view" style="font-size: 1.5rem; cursor: pointer;"></i>
+          <i class="fas fa-cart-plus text-white mx-2 icon-add" style="font-size: 1.5rem; cursor: pointer;"></i>
         </div>
       </div>
-    `;
+      <div class="card-body">
+        <h5 class="card-title">${product.name}</h5>
+        <p class="card-text text-primary font-weight-bold">$${product.price.toFixed(
+          2
+        )}</p>
+      </div>
+    </div>
+  `;
 
-    // Escuchar cambios de tema
-    document.addEventListener("theme-change", (event) => {
-      const theme = event.detail;
-      const card = shadow.querySelector(".card");
-      const cardBody = shadow.querySelector(".card-body");
-      const button = shadow.querySelector(".btn-cc");
-      const paragraph = shadow.querySelector("p");
+  // Manejar clic en "Ver Producto"
+  card
+    .querySelector(".icon-view")
+    .addEventListener("click", () => onView(product));
 
-      if (theme === "dark") {
-        card.style.backgroundColor = "#333";
-        card.style.color = "white";
-        button.style.backgroundColor = "#444";
-        button.style.color = "#fff";
-        paragraph.style.color = "#ccc"; // Párrafo en color claro
-      } else {
-        card.style.backgroundColor = "#f9f9f9";
-        card.style.color = "#000";
-        button.style.backgroundColor = "#007bff";
-        button.style.color = "#fff";
-        paragraph.style.color = "#555"; // Párrafo en color oscuro
-      }
-    });
-  }
+  // Manejar clic en "Agregar al Carrito"
+  card
+    .querySelector(".icon-add")
+    .addEventListener("click", () => onAddToCart(product));
+
+  return card;
 }
-
-// Registrar el componente
-customElements.define("card-component", CardComponent);

@@ -1,0 +1,92 @@
+/* Asegúrate de que la barra lateral tenga un buen aspecto */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease;
+  z-index: 999;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.cart-sidebar.visible {
+  right: 0;
+}
+
+/* Botón de cierre */
+/* Botón de cierre mejorado con icono */
+.close-cart-sidebar {
+  background: none;
+  color: #ff4d4f;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.close-cart-sidebar:hover {
+  color: #e43d3f;
+  transform: scale(1.1);
+}
+
+.close-cart-sidebar:focus {
+  outline: none;
+  box-shadow: none;
+}
+.cart-item {
+  display: flex;
+  margin: 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.cart-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.cart-item-info {
+  flex: 1;
+  font-size: 14px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-controls button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.quantity-controls input {
+  width: 50px;
+  text-align: center;
+  margin: 0 5px;
+  font-size: 14px;
+}
+/* Eliminar flechas de inputs numéricos */
+input[type="number"].quantity-input {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"].quantity-input::-webkit-outer-spin-button,
+input[type="number"].quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  margin: 0;
+}
