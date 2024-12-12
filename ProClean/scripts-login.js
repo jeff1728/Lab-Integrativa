@@ -25,11 +25,11 @@ class LoginComponent extends HTMLElement {
             </div>
         `;
 
-        // Referencias a elementos dinámicos
+        // Referencias a elementos dinámicos (CAMBIO DE INICIO DE SESION A REGISTRO SIN CHOQUE DE INGRESO DE DATOS)
         this.formContainer = this.shadowRoot.getElementById('formContainer');
         this.toggleLink = this.shadowRoot.getElementById('toggleLink');
 
-        // Agrega un listener al enlace para alternar entre formularios
+        // Agrega un listener al enlace para alternar entre formularios (CAMBIA DE FORMULARIO DEPENDIENDO DEL CLIC)
         this.toggleLink.addEventListener('click', () => this.toggleForm());
 
         // Muestra el formulario de inicio de sesión por defecto
@@ -54,7 +54,7 @@ class LoginComponent extends HTMLElement {
             </form>
         `;
 
-        // Agrega un listener para manejar el envío del formulario
+        // Agrega un listener para manejar el envío del formulario (EL USUARIO ENVIA EL FORMULARIO)
         const loginForm = this.shadowRoot.getElementById('loginForm');
         loginForm.addEventListener('submit', (e) => this.handleLogin(e));
     }
