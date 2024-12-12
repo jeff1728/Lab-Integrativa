@@ -1,191 +1,210 @@
-class LoginModal extends HTMLElement {
+class LoginComponent extends HTMLElement {
   constructor() {
-    super();
-    const shadow = this.attachShadow({ mode: "open" });
-
-    shadow.innerHTML = `
-              <!-- Bootstrap Icons -->
-              <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-              <style>
-                  .btn-close-custom {
-                      background-color: #dc3545;
-                      color: red;
-                      font-size: 1.2rem;
-                      width: 2rem;
-                      height: 2rem;
-                      border: none;
-                      border-radius: 50%;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      cursor: pointer;
-                      position: absolute;
-                      top: 0.5rem;
-                      right: 0.5rem;
-                      transition: background-color 0.2s ease, transform 0.2s ease;
-                  }
-                  .btn-close-custom:hover {
-                      background-color: #c82333;
-                      transform: scale(1.1);
-                  }
-              </style>
-              <div class="modal fade" tabindex="-1" id="loginModal" aria-labelledby="loginModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header position-relative">
-                              <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
-                              <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close">×</button>
-                          </div>
-                          <div class="modal-body">
-                              <form id="loginForm">
-                                  <div class="mb-3">
-                                      <label for="loginUsername" class="form-label">Usuario</label>
-                                      <input type="text" id="loginUsername" class="form-control" placeholder="Ingresa tu usuario" required>
-                                  </div>
-                                  <div class="mb-3">
-                                      <label for="loginPassword" class="form-label">Contraseña</label>
-                                      <input type="password" id="loginPassword" class="form-control" placeholder="Ingresa tu contraseña" required>
-                                  </div>
-                                  <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
-                              </form>
-                              <hr>
-                              <h6 class="text-center">¿No tienes cuenta?</h6>
-                              <a href="#" id="registerLink" class="btn btn-link text-center w-100">Regístrate aquí</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          `;
-
-    this.modalElement = shadow.querySelector(".modal");
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.users = [];
   }
 
   connectedCallback() {
-    this.initializeHandlers();
+      this.render();
+      this.loadUsers();
   }
 
-  initializeHandlers() {
-    const shadow = this.shadowRoot;
-
-    // Abrir el modal de registro al hacer clic en "Regístrate"
-    shadow.querySelector("#registerLink").addEventListener("click", () => {
-      // Cerrar el modal de inicio de sesión
-      const loginModalInstance = bootstrap.Modal.getInstance(this.modalElement);
-      if (loginModalInstance) {
-        loginModalInstance.hide();
-      }
-
-      // Abrir el modal de registro
-      const registerModal = document.querySelector("register-modal");
-      if (registerModal) {
-        document.querySelector("#loginModal").setAttribute("inert", ""); // Inhabilita el modal de login
-        registerModal.show();
-        registerModal.shadowRoot.querySelector("input").focus(); // Foco en el primer input
-        registerModal.shadowRoot
-          .querySelector(".modal")
-          .addEventListener("hidden.bs.modal", () => {
-            document.querySelector("#loginModal").removeAttribute("inert"); // Reactiva el modal de login
-          });
-      }
-    });
-
-    // Manejo del formulario de inicio de sesión
-    shadow.querySelector("#loginForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const username = shadow.querySelector("#loginUsername").value;
-      const password = shadow.querySelector("#loginPassword").value;
-
-      const storedUsername = localStorage.getItem("username");
-      const storedPassword = localStorage.getItem("password");
-
-      if (username === storedUsername && password === storedPassword) {
-        alert("Inicio de sesión exitoso.");
-        const modal = bootstrap.Modal.getInstance(this.modalElement);
-        modal.hide(); // Cerrar el modal de login
-      } else {
-        alert("Usuario o contraseña incorrectos.");
-      }
-    });
-  }
-
-  show() {
-    const modal = new bootstrap.Modal(this.modalElement);
-    modal.show();
-  }
-}
-
-class RegisterModal extends HTMLElement {
-  constructor() {
-    super();
-    const shadow = this.attachShadow({ mode: "open" });
-
-    shadow.innerHTML = `
-              <!-- Bootstrap Icons -->
-              <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-              <div class="modal fade" tabindex="-1" id="registerModal" aria-labelledby="registerModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header position-relative">
-                              <h5 class="modal-title" id="registerModalLabel">Registrar Usuario</h5>
-                              <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close">×</button>
-                          </div>
-                          <div class="modal-body">
-                              <form id="registerForm">
-                                  <div class="mb-3">
-                                      <label for="registerUsername" class="form-label">Usuario</label>
-                                      <input type="text" id="registerUsername" class="form-control" placeholder="Crea tu usuario" required>
-                                  </div>
-                                  <div class="mb-3">
-                                      <label for="registerPassword" class="form-label">Contraseña</label>
-                                      <input type="password" id="registerPassword" class="form-control" placeholder="Crea tu contraseña" required>
-                                  </div>
-                                  <button type="submit" class="btn btn-success w-100">Registrar</button>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
+  render() {
+      this.shadowRoot.innerHTML = `
+          <style>
+              :host {
+                position: fixed;
+                top: 75%;
+                left: 85%;
+                transform: translate(-50%, -50%); 
+                width: 100%;
+                height: 100%;
+                display: flex; 
+                justify-content: center;
+                align-items: center;
+                z-index: 1000; 
+              }
+              .container {
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                padding: 50px;
+                width: 400px;
+                max-width: 90%;
+              }
+              .form-group {
+                  margin-bottom: 15px;
+              }
+              input {
+                  width: 100%;
+                  padding: 10px;
+                  margin-top: 5px;
+                  border: 1px solid #ddd;
+                  border-radius: 4px;
+              }
+              button {
+                  width: 100%;
+                  padding: 10px;
+                  background-color: #4CAF50;
+                  color: white;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+              }
+              .toggle-form {
+                  text-align: center;
+                  margin-top: 15px;
+              }
+              .alert {
+                  padding: 10px;
+                  margin-bottom: 15px;
+                  border-radius: 4px;
+              }
+              .alert-success {
+                  background-color: #dff0d8;
+                  color: #3c763d;
+                  border: 1px solid #d6e9c6;
+              }
+              .alert-error {
+                  background-color: #f2dede;
+                  color: #a94442;
+                  border: 1px solid #ebccd1;
+              }
+          </style>
+          <div class="container">
+              <div id="formContainer"></div>
+              <div class="toggle-form">
+                  <p id="toggleLink">¿No tienes cuenta? Regístrate</p>
               </div>
-          `;
+          </div>
+      `;
 
-    this.modalElement = shadow.querySelector(".modal");
+      this.formContainer = this.shadowRoot.getElementById('formContainer');
+      this.toggleLink = this.shadowRoot.getElementById('toggleLink');
+      this.toggleLink.addEventListener('click', () => this.toggleForm());
+
+      this.showLoginForm();
   }
 
-  connectedCallback() {
-    this.initializeHandlers();
+  showLoginForm() {
+      this.formContainer.innerHTML = `
+          <h2>Iniciar Sesión</h2>
+          <div id="loginAlert"></div>
+          <form id="loginForm">
+              <div class="form-group">
+                  <label>Usuario</label>
+                  <input type="text" id="loginUsername" required>
+              </div>
+              <div class="form-group">
+                  <label>Contraseña</label>
+                  <input type="password" id="loginPassword" required>
+              </div>
+              <button type="submit">Iniciar Sesión</button>
+          </form>
+      `;
+
+      const loginForm = this.shadowRoot.getElementById('loginForm');
+      loginForm.addEventListener('submit', (e) => this.handleLogin(e));
   }
 
-  initializeHandlers() {
-    const shadow = this.shadowRoot;
+  showRegistrationForm() {
+      this.formContainer.innerHTML = `
+          <h2>Registrarse</h2>
+          <div id="registerAlert"></div>
+          <form id="registrationForm">
+              <div class="form-group">
+                  <label>Usuario</label>
+                  <input type="text" id="regUsername" required>
+              </div>
+              <div class="form-group">
+                  <label>Contraseña</label>
+                  <input type="password" id="regPassword" required>
+              </div>
+              <div class="form-group">
+                  <label>Confirmar Contraseña</label>
+                  <input type="password" id="regConfirmPassword" required>
+              </div>
+              <button type="submit">Registrarse</button>
+          </form>
+      `;
 
-    shadow.querySelector("#registerForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const username = shadow.querySelector("#registerUsername").value;
-      const password = shadow.querySelector("#registerPassword").value;
+      const registrationForm = this.shadowRoot.getElementById('registrationForm');
+      registrationForm.addEventListener('submit', (e) => this.handleRegistration(e));
+  }
 
-      if (username && password) {
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        alert("¡Registro exitoso!");
-        const modal = bootstrap.Modal.getInstance(this.modalElement);
-        modal.hide(); // Cerrar el modal de registro
+  toggleForm() {
+      if (this.shadowRoot.querySelector('h2').textContent === 'Iniciar Sesión') {
+          this.showRegistrationForm();
+          this.toggleLink.textContent = '¿Ya tienes cuenta? Inicia sesión';
       } else {
-        alert("Por favor completa todos los campos.");
+          this.showLoginForm();
+          this.toggleLink.textContent = '¿No tienes cuenta? Regístrate';
       }
-    });
   }
 
-  show() {
-    const modal = new bootstrap.Modal(this.modalElement);
-    modal.show();
+  handleLogin(e) {
+      e.preventDefault();
+      const username = this.shadowRoot.getElementById('loginUsername').value;
+      const password = this.shadowRoot.getElementById('loginPassword').value;
+      const loginAlert = this.shadowRoot.getElementById('loginAlert');
+
+      const user = this.users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+          loginAlert.innerHTML = `<div class="alert alert-success">Inicio de sesión exitoso para ${username}</div>`;
+          this.clearAlert(loginAlert);
+      } else {
+          loginAlert.innerHTML = `<div class="alert alert-error">Credenciales incorrectas</div>`;
+          this.clearAlert(loginAlert);
+      }
+  }
+
+  handleRegistration(e) {
+      e.preventDefault();
+      const username = this.shadowRoot.getElementById('regUsername').value;
+      const password = this.shadowRoot.getElementById('regPassword').value;
+      const confirmPassword = this.shadowRoot.getElementById('regConfirmPassword').value;
+      const registerAlert = this.shadowRoot.getElementById('registerAlert');
+
+      if (password !== confirmPassword) {
+          registerAlert.innerHTML = `<div class="alert alert-error">Las contraseñas no coinciden</div>`;
+          this.clearAlert(registerAlert);
+          return;
+      }
+
+      if (this.users.some(u => u.username === username)) {
+          registerAlert.innerHTML = `<div class="alert alert-error">El usuario ya existe</div>`;
+          this.clearAlert(registerAlert);
+          return;
+      }
+
+      this.users.push({ username, password });
+      this.saveUsers();
+      registerAlert.innerHTML = `<div class="alert alert-success">Registro exitoso para ${username}</div>`;
+      this.clearAlert(registerAlert);
+      
+      // Cambiar a formulario de inicio de sesión
+      this.showLoginForm();
+      this.toggleLink.textContent = '¿No tienes cuenta? Regístrate';
+  }
+
+  clearAlert(alertElement) {
+      setTimeout(() => {
+          alertElement.innerHTML = '';
+      }, 3000);
+  }
+
+  saveUsers() {
+      localStorage.setItem('registeredUsers', JSON.stringify(this.users));
+  }
+
+  loadUsers() {
+      const savedUsers = localStorage.getItem('registeredUsers');
+      if (savedUsers) {
+          this.users = JSON.parse(savedUsers);
+      }
   }
 }
 
-customElements.define("login-modal", LoginModal);
-customElements.define("register-modal", RegisterModal);
-
-document.getElementById("openLoginModal").addEventListener("click", () => {
-  const loginModal = document.querySelector("login-modal");
-  loginModal.show();
-});
+customElements.define('login-component', LoginComponent);
