@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Productos de Limpieza</title>
+    <link href="img/favicon.ico" rel="icon" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="contact.js" defer></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-primary py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center"></div>
+                </div>
+                <div class="col-md-6 text-center text-lg-right">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-white px-3" href="https://www.facebook.com/">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-white px-3" href="https://x.com/?lang=es">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-white px-3" href="https://www.linkedin.com/login/es?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-white px-3" href="https://www.instagram.com/accounts/login/">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="text-white pl-3" href="https://www.youtube.com/">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9">
+            <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="#" class="navbar-brand">
+                    <h1 class="m-0 text-secondary">
+                        <span class="text-primary">PRO</span>CLEAN
+                    </h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="index.html" class="nav-item nav-link active">Inicio</a>
+                        <a href="index.html" class="nav-item nav-link">Acerca</a>
+                        <a href="index.html" class="nav-item nav-link">Servicios</a>
+                        <a href="index.html" class="nav-item nav-link">Precios</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categorias</a>
+                            <div class="dropdown-menu border-0 rounded-0 m-0">
+                                <a href="carlosc.html" class="dropdown-item">Oficina</a>
+                                <a href="pricing.html" class="dropdown-item">Hogar</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                        <a href="#" id="openLoginModal" class="nav-item nav-link">
+                            <i class="bi bi-person-fill"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Purpose Section -->
+        <section class="text-center mb-5">
+            <!-- <img src="https://img.freepik.com/foto-gratis/mujeres-trabajando-call-center_23-2148094879.jpg?t=st=1733685795~exp=1733689395~hmac=cec9b93f4e2c9e7e327e82c6b9062b99e3f48e7672645ec865d80328f7f87520&w=740" alt="Atención al Cliente" class="img-fluid mb-3"> -->
+            <h2>Atención al Cliente</h2>
+            <p>Nuestro objetivo es brindar la mejor atención al cliente. Estamos aquí para ayudarte con cualquier consulta o problema que puedas tener.</p>
+        </section>
+
+        <!-- Contact Information Section -->
+        <section class="row">
+            <div class="col-md-6">
+                <h2>Información de contacto</h2>
+                <ul class="list-unstyled">
+                    <li><strong>Teléfono:</strong> +593 99 123 4567</li>
+                    <li><strong>Correo electrónico:</strong> atencion@productoslimpieza.com</li>
+                    <li><strong>Horario:</strong> Lunes a Viernes de 9:00 AM a 6:00 PM</li>
+                    <li><strong>Dirección:</strong> Santo Domingo, Ecuador</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2>Formulario de contacto</h2>
+                <p>Si tiene alguna queja o inquietud envienos un mensaje especificando su problema y le responderemos</p>
+                <contacto-form></contacto-form>
+            </div>
+        </section>
+
+
+        <!-- Inicio Etiqueta template del formulario  -->
+        <template id="formulario">
+            <link rel="stylesheet" href="/css/style.css">
+            <form action="" method="POST" class="needs-validation" novalidate>
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    <div class="invalid-feedback">Por favor, ingrese su nombre completo.</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback">Por favor, ingrese un correo electrónico válido.</div>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{10}" required>
+                    <div class="invalid-feedback">Por favor, ingrese un número de teléfono válido (10 dígitos).</div>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
+                    <div class="invalid-feedback">Por favor, ingrese su mensaje.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </template>
+         <!--Fin Etiqueta template del formulario  -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3">
+        <div class="container">
+            <p>&copy; 2024 Productos de Limpieza - Todos los derechos reservados</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="politicas.html" class="text-white">Políticas de privacidad</a></li>
+                <li class="list-inline-item"><a href="terminos.html" class="text-white">Términos y condiciones</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
+
