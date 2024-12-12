@@ -1,217 +1,182 @@
 class LoginComponent extends HTMLElement {
-  constructor() {
-      super();
-      this.attachShadow({ mode: 'open' });
-      this.users = [];
-  }
+    constructor() {
+        super();
+        // Crea un shadow DOM para encapsular el componente
+        this.attachShadow({ mode: 'open' });
+        // Inicializa una lista vacía de usuarios
+        this.users = [];
+    }
 
-  connectedCallback() {
-      this.render();
-      this.loadUsers();
-  }
+    connectedCallback() {
+        // Método llamado cuando el componente es agregado al DOM
+        this.render(); // Renderiza el contenido inicial del componente
+        this.loadUsers(); // Carga usuarios previamente registrados desde localStorage
+    }
 
-  render() {
-      this.shadowRoot.innerHTML = `
-          <style>
-              :host {
-                position: fixed;
-                top: 75%;
-                left: 85%;
-                transform: translate(-50%, -50%); 
-                width: 100%;
-                height: 100%;
-                display: flex; 
-                justify-content: center;
-                align-items: center;
-                z-index: 1000; 
-              }
-              .container {
-                background-color: white;
-                border-radius: 8px;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                padding: 50px;
-                width: 400px;
-                max-width: 90%;
-              }
-              .form-group {
-                  margin-bottom: 15px;
-              }
-              input {
-                  width: 100%;
-                  padding: 10px;
-                  margin-top: 5px;
-                  border: 1px solid #ddd;
-                  border-radius: 4px;
-              }
-              button {
-                  width: 100%;
-                  padding: 10px;
-                  background-color: #4CAF50;
-                  color: white;
-                  border: none;
-                  border-radius: 4px;
-                  cursor: pointer;
-              }
-              .toggle-form {
-                  text-align: center;
-                  margin-top: 15px;
-              }
-              .alert {
-                  padding: 10px;
-                  margin-bottom: 15px;
-                  border-radius: 4px;
-              }
-              .alert-success {
-                  background-color: #dff0d8;
-                  color: #3c763d;
-                  border: 1px solid #d6e9c6;
-              }
-              .alert-error {
-                  background-color: #f2dede;
-                  color: #a94442;
-                  border: 1px solid #ebccd1;
-              }
-          </style>
-          <div class="container">
-              <div id="formContainer"></div>
-              <div class="toggle-form">
-                  <p id="toggleLink">¿No tienes cuenta? Regístrate</p>
-              </div>
-          </div>
-      `;
+    render() {
+        // Define el HTML del componente dentro del shadow DOM
+        this.shadowRoot.innerHTML = `
+            <link rel="stylesheet" href="css/styleLogin.css">
+            <div class="container">
+                <div id="formContainer"></div>
+                <div class="toggle-form">
+                    <p id="toggleLink">¿No tienes cuenta? Regístrate</p>
+                </div>
+            </div>
+        `;
 
-      this.formContainer = this.shadowRoot.getElementById('formContainer');
-      this.toggleLink = this.shadowRoot.getElementById('toggleLink');
-      this.toggleLink.addEventListener('click', () => this.toggleForm());
+        // Referencias a elementos dinámicos
+        this.formContainer = this.shadowRoot.getElementById('formContainer');
+        this.toggleLink = this.shadowRoot.getElementById('toggleLink');
 
-      this.showLoginForm();
-  }
+        // Agrega un listener al enlace para alternar entre formularios
+        this.toggleLink.addEventListener('click', () => this.toggleForm());
 
-  showLoginForm() {
-      this.formContainer.innerHTML = `
-          <h2>Iniciar Sesión</h2>
-          <div id="loginAlert"></div>
-          <form id="loginForm">
-              <div class="form-group">
-                  <label>Usuario</label>
-                  <input type="text" id="loginUsername" required>
-              </div>
-              <div class="form-group">
-                  <label>Contraseña</label>
-                  <input type="password" id="loginPassword" required>
-              </div>
-              <button type="submit">Iniciar Sesión</button>
-          </form>
-      `;
+        // Muestra el formulario de inicio de sesión por defecto
+        this.showLoginForm();
+    }
 
-      const loginForm = this.shadowRoot.getElementById('loginForm');
-      loginForm.addEventListener('submit', (e) => this.handleLogin(e));
-  }
+    showLoginForm() {
+        // Define el contenido del formulario de inicio de sesión
+        this.formContainer.innerHTML = `
+            <h2>Iniciar Sesión</h2>
+            <div id="loginAlert"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        `;
 
-  showRegistrationForm() {
-      this.formContainer.innerHTML = `
-          <h2>Registrarse</h2>
-          <div id="registerAlert"></div>
-          <form id="registrationForm">
-              <div class="form-group">
-                  <label>Usuario</label>
-                  <input type="text" id="regUsername" required>
-              </div>
-              <div class="form-group">
-                  <label>Contraseña</label>
-                  <input type="password" id="regPassword" required>
-              </div>
-              <div class="form-group">
-                  <label>Confirmar Contraseña</label>
-                  <input type="password" id="regConfirmPassword" required>
-              </div>
-              <button type="submit">Registrarse</button>
-          </form>
-      `;
+        // Agrega un listener para manejar el envío del formulario
+        const loginForm = this.shadowRoot.getElementById('loginForm');
+        loginForm.addEventListener('submit', (e) => this.handleLogin(e));
+    }
 
-      const registrationForm = this.shadowRoot.getElementById('registrationForm');
-      registrationForm.addEventListener('submit', (e) => this.handleRegistration(e));
-  }
+    showRegistrationForm() {
+        // Define el contenido del formulario de registro
+        this.formContainer.innerHTML = `
+            <h2>Registrarse</h2>
+            <div id="registerAlert"></div>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" id="regUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirmar Contraseña</label>
+                    <input type="password" id="regConfirmPassword" required>
+                </div>
+                <button type="submit">Registrarse</button>
+            </form>
+        `;
 
-  toggleForm() {
-      if (this.shadowRoot.querySelector('h2').textContent === 'Iniciar Sesión') {
-          this.showRegistrationForm();
-          this.toggleLink.textContent = '¿Ya tienes cuenta? Inicia sesión';
-      } else {
-          this.showLoginForm();
-          this.toggleLink.textContent = '¿No tienes cuenta? Regístrate';
-      }
-  }
+        // Agrega un listener para manejar el envío del formulario
+        const registrationForm = this.shadowRoot.getElementById('registrationForm');
+        registrationForm.addEventListener('submit', (e) => this.handleRegistration(e));
+    }
 
-  handleLogin(e) {
-      e.preventDefault();
-      const username = this.shadowRoot.getElementById('loginUsername').value;
-      const password = this.shadowRoot.getElementById('loginPassword').value;
-      const loginAlert = this.shadowRoot.getElementById('loginAlert');
+    toggleForm() {
+        // Alterna entre el formulario de inicio de sesión y el de registro
+        if (this.shadowRoot.querySelector('h2').textContent === 'Iniciar Sesión') {
+            this.showRegistrationForm();
+            this.toggleLink.textContent = '¿Ya tienes cuenta? Inicia sesión';
+        } else {
+            this.showLoginForm();
+            this.toggleLink.textContent = '¿No tienes cuenta? Regístrate';
+        }
+    }
 
-      const user = this.users.find(u => u.username === username && u.password === password);
+    handleLogin(e) {
+        e.preventDefault(); // Previene el envío predeterminado del formulario
+        const username = this.shadowRoot.getElementById('loginUsername').value;
+        const password = this.shadowRoot.getElementById('loginPassword').value;
+        const loginAlert = this.shadowRoot.getElementById('loginAlert');
 
-      if (user) {
-          loginAlert.innerHTML = `<div class="alert alert-success">Inicio de sesión exitoso para ${username}</div>`;
-          this.clearAlert(loginAlert);
-          this.closeModal(); // Cierra el modal después de mostrar la alerta
-      } else {
-          loginAlert.innerHTML = `<div class="alert alert-error">Credenciales incorrectas</div>`;
-          this.clearAlert(loginAlert);
-      }
-  }
+        // Busca un usuario con las credenciales proporcionadas
+        const user = this.users.find(u => u.username === username && u.password === password);
 
-  handleRegistration(e) {
-      e.preventDefault();
-      const username = this.shadowRoot.getElementById('regUsername').value;
-      const password = this.shadowRoot.getElementById('regPassword').value;
-      const confirmPassword = this.shadowRoot.getElementById('regConfirmPassword').value;
-      const registerAlert = this.shadowRoot.getElementById('registerAlert');
+        if (user) {
+            // Muestra un mensaje de éxito si las credenciales son correctas
+            loginAlert.innerHTML = `<div class="alert alert-success">Inicio de sesión exitoso para ${username}</div>`;
+            this.clearAlert(loginAlert);
+            this.closeModal(); // Cierra el modal tras iniciar sesión
+        } else {
+            // Muestra un mensaje de error si las credenciales son incorrectas
+            loginAlert.innerHTML = `<div class="alert alert-error">Credenciales incorrectas</div>`;
+            this.clearAlert(loginAlert);
+        }
+    }
 
-      if (password !== confirmPassword) {
-          registerAlert.innerHTML = `<div class="alert alert-error">Las contraseñas no coinciden</div>`;
-          this.clearAlert(registerAlert);
-          return;
-      }
+    handleRegistration(e) {
+        e.preventDefault(); // Previene el envío predeterminado del formulario
+        const username = this.shadowRoot.getElementById('regUsername').value;
+        const password = this.shadowRoot.getElementById('regPassword').value;
+        const confirmPassword = this.shadowRoot.getElementById('regConfirmPassword').value;
+        const registerAlert = this.shadowRoot.getElementById('registerAlert');
 
-      if (this.users.some(u => u.username === username)) {
-          registerAlert.innerHTML = `<div class="alert alert-error">El usuario ya existe</div>`;
-          this.clearAlert(registerAlert);
-          return;
-      }
+        // Valida que las contraseñas coincidan
+        if (password !== confirmPassword) {
+            registerAlert.innerHTML = `<div class="alert alert-error">Las contraseñas no coinciden</div>`;
+            this.clearAlert(registerAlert);
+            return;
+        }
 
-      this.users.push({ username, password });
-      this.saveUsers();
-      registerAlert.innerHTML = `<div class="alert alert-success">Registro exitoso para ${username}</div>`;
-      this.clearAlert(registerAlert);
-      
-      // Cambiar a formulario de inicio de sesión
-      this.showLoginForm();
-      this.toggleLink.textContent = '¿No tienes cuenta? Regístrate';
-  }
+        // Verifica si el usuario ya existe
+        if (this.users.some(u => u.username === username)) {
+            registerAlert.innerHTML = `<div class="alert alert-error">El usuario ya existe</div>`;
+            this.clearAlert(registerAlert);
+            return;
+        }
 
-  clearAlert(alertElement) {
-      setTimeout(() => {
-          alertElement.innerHTML = '';
-      }, 3000);
-  }
+        // Agrega un nuevo usuario a la lista y lo guarda en localStorage
+        this.users.push({ username, password });
+        this.saveUsers();
+        registerAlert.innerHTML = `<div class="alert alert-success">Registro exitoso para ${username}</div>`;
+        this.clearAlert(registerAlert);
 
-  closeModal() {
-      setTimeout(() => {
-          this.style.display = 'none';
-      }, 3000); // Ajusta el tiempo según sea necesario
-  }
+        // Cambia al formulario de inicio de sesión tras el registro
+        this.showLoginForm();
+        this.toggleLink.textContent = '¿No tienes cuenta? Regístrate';
+    }
 
-  saveUsers() {
-      localStorage.setItem('registeredUsers', JSON.stringify(this.users));
-  }
+    clearAlert(alertElement) {
+        // Limpia el contenido de un mensaje de alerta tras 3 segundos
+        setTimeout(() => {
+            alertElement.innerHTML = '';
+        }, 3000);
+    }
 
-  loadUsers() {
-      const savedUsers = localStorage.getItem('registeredUsers');
-      if (savedUsers) {
-          this.users = JSON.parse(savedUsers);
-      }
-  }
+    closeModal() {
+        // Oculta el componente tras 3 segundos
+        setTimeout(() => {
+            this.style.display = 'none';
+        }, 3000);
+    }
+
+    saveUsers() {
+        // Guarda los usuarios registrados en localStorage
+        localStorage.setItem('registeredUsers', JSON.stringify(this.users));
+    }
+
+    loadUsers() {
+        // Carga los usuarios registrados desde localStorage
+        const savedUsers = localStorage.getItem('registeredUsers');
+        if (savedUsers) {
+            this.users = JSON.parse(savedUsers);
+        }
+    }
 }
 
+// Define el componente personalizado
 customElements.define('login-component', LoginComponent);
