@@ -5,37 +5,26 @@
     <title>Lab2</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon" />
-
-    <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <!-- Bootstrap Icons -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Font Awesome -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
       rel="stylesheet"
     />
-
-    <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet" />
   </head>
 
   <body>
-    <!-- Topbar Start -->
+    <!-- inicio del encabezado principal -->
     <div class="container-fluid bg-primary py-3">
       <div class="container">
         <div class="row">
@@ -70,8 +59,9 @@
         </div>
       </div>
     </div>
-    <!-- Topbar End -->
-    <!-- Navbar Start -->
+    <!-- FIN encabezado principal -->
+
+    <!-- INICIO Encabezado Secundario  -->
     <div class="container-fluid position-relative nav-bar p-0">
       <div
         class="container-lg position-relative p-0 px-lg-3"
@@ -80,7 +70,7 @@
         <nav
           class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 pl-3 pl-lg-5"
         >
-          <a href="#" class="navbar-brand">
+          <a href="index.html" class="navbar-brand">
             <h1 class="m-0 text-secondary">
               <span class="text-primary">PRO</span>CLEAN
             </h1>
@@ -124,7 +114,7 @@
                   <a href="pricing.html" class="dropdown-item">Hogar</a>
                 </div>
               </div>
-              <a href="index.html" class="nav-item nav-link"
+              <a href="contact.html" class="nav-item nav-link"
                 >Contacto</a
               >
               <a href="#" id="login-button" class="nav-item nav-link">
@@ -135,8 +125,11 @@
         </nav>
       </div>
     </div>   
+  <!--Encabezado Secundario -->
 
-    <login-component style="display: none;"></login-component>
+  <!-- FUNCIONALIDAD DEL MODAL DEL LOGIN -->
+    
+  <login-component style="display: none;"></login-component>
 
 <!-- Script para manejar el componente -->
 <script>
@@ -149,9 +142,7 @@
   });
 </script>
 
-    <!-- Componente del Modal -->
-
-    <!-- Carousel Start -->
+    <!-- INICIO del Carousel -->
     <div class="container-fluid p-0">
       <div id="header-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -212,9 +203,9 @@
         </a>
       </div>
     </div>
-    <!-- Carousel End -->
+    <!-- FIN del Carousel -->
 
-    <!-- Contact Info Start -->
+    <!-- INICIO de contactos-->
     <div class="container-fluid contact-info mt-5 mb-4">
       <div class="container" style="padding: 0 30px">
         <div class="row">
@@ -260,9 +251,8 @@
         </div>
       </div>
     </div>
-    <!-- Contact Info End -->
+    <!-- FIN de contactos -->
 
-    <!-- About Start -->
     <!-- Sobre Nosotros Inicio -->
     <div class="container-fluid py-5">
       <div class="container pt-0 pt-lg-4">
@@ -327,8 +317,6 @@
         </div>
       </div>
     </div>
-
-    <!-- About End -->
 
     <!-- Servicios Inicio -->
     <div class="container-fluid pt-5 pb-3">
@@ -521,7 +509,7 @@
 
     <!-- Pie de Página Fin -->
 
-    <!-- Back to Top -->
+    <!-- BOTON PARA REDIRIJIR AL INICIO DE LA PAGINA -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"
       ><i class="fa fa-angle-double-up"></i
     ></a>
@@ -536,7 +524,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bcrypt.js/2.4.3/bcrypt.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script src="ProClean/scripts-login.js"></script>
   </body>
