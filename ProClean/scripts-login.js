@@ -154,6 +154,7 @@ class LoginComponent extends HTMLElement {
       if (user) {
           loginAlert.innerHTML = `<div class="alert alert-success">Inicio de sesión exitoso para ${username}</div>`;
           this.clearAlert(loginAlert);
+          this.closeModal(); // Cierra el modal después de mostrar la alerta
       } else {
           loginAlert.innerHTML = `<div class="alert alert-error">Credenciales incorrectas</div>`;
           this.clearAlert(loginAlert);
@@ -193,6 +194,12 @@ class LoginComponent extends HTMLElement {
       setTimeout(() => {
           alertElement.innerHTML = '';
       }, 3000);
+  }
+
+  closeModal() {
+      setTimeout(() => {
+          this.style.display = 'none';
+      }, 3000); // Ajusta el tiempo según sea necesario
   }
 
   saveUsers() {
