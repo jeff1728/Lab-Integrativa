@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Lab2</title>
+    <title>ProClean</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <!-- Favicon -->
@@ -98,10 +98,20 @@
             id="navbarCollapse"
           >
             <div class="navbar-nav ml-auto py-0">
-              <a href="index.html" class="nav-item nav-link active">Inicio</a>
-              <a href="index.html" class="nav-item nav-link">Acerca</a>
-              <a href="index.html" class="nav-item nav-link">Servicios</a>
-              <a href="index.html" class="nav-item nav-link">Precios</a>
+              <a
+                href="index.html"
+                class="nav-item nav-link active"
+                >Inicio</a
+              >
+              <a href="index.html" class="nav-item nav-link"
+                >Acerca</a
+              >
+              <a href="index.html" class="nav-item nav-link"
+                >Servicios</a
+              >
+              <a href="index.html" class="nav-item nav-link"
+                >Precios</a
+              >
               <div class="nav-item dropdown">
                 <a
                   href="#"
@@ -114,19 +124,31 @@
                   <a href="pricing.html" class="dropdown-item">Hogar</a>
                 </div>
               </div>
-              <a href="index.html" class="nav-item nav-link">Contacto</a>
-              <a href="#" id="openLoginModal" class="nav-item nav-link">
+              <a href="index.html" class="nav-item nav-link"
+                >Contacto</a
+              >
+              <a href="#" id="login-button" class="nav-item nav-link">
                 <i class="bi bi-person-fill"></i>
-              </a>
+            </a>
             </div>
           </div>
         </nav>
       </div>
-    </div>
-    <!-- Navbar End -->
+    </div>   
 
-    <login-modal></login-modal>
-    <register-modal></register-modal>
+    <login-component style="display: none;"></login-component>
+
+<!-- Script para manejar el componente -->
+<script>
+  const loginButton = document.getElementById('login-button');
+  const loginComponent = document.querySelector('login-component');
+
+  loginButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginComponent.style.display = 'block'; // Cambia 'start' a 'block'
+  });
+</script>
+
     <!-- Componente del Modal -->
 
     <!-- Carousel Start -->
@@ -511,6 +533,7 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/counterup/counterup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcrypt.js/2.4.3/bcrypt.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
